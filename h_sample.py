@@ -1,5 +1,5 @@
 # ----------------------------------------------
-# Greedy Best-First Search for Hierarchical Routing
+# Greedy Best-First Search Example
 # https://www.geeksforgeeks.org/artificial-intelligence/greedy-best-first-search-in-ai/
 # ----------------------------------------------
 
@@ -22,19 +22,17 @@ class Node:
 
 
 # ----------------------------------------------
-# Greedy Best-First Search with Hierarchical Regions
+# Standard Greedy Best-First Search
 # ----------------------------------------------
-def greedy_best_first_search_hierarchical(graph, start, goal, heuristic, region_map):
+def greedy_best_first_search(graph, start, goal, heuristic):
     """
-    Perform Greedy Best-First Search considering regions.
-    Nodes within the same region are prioritized before exploring other regions.
+    Perform Greedy Best-First Search using only heuristic values.
 
     Parameters:
         graph: dict - adjacency list of nodes
         start: str - starting node
         goal: str - target node
         heuristic: dict - heuristic values for each node
-        region_map: dict - maps each node to a region ID
     """
     # Initialize priority queue with the start node (using its heuristic as priority)
     priority_queue = []
@@ -55,23 +53,9 @@ def greedy_best_first_search_hierarchical(graph, start, goal, heuristic, region_
         # Mark current node as visited
         visited.add(current_node)
 
-        # Identify current region of the node
-        current_region = region_map[current_node]
-
-        # -------------------------------
-        # Phase 1: Explore neighbors in the same region first
-        # -------------------------------
+        # Explore neighbors based solely on their heuristic values
         for neighbor in graph[current_node]:
-            if neighbor not in visited and region_map[neighbor] == current_region:
-                heapq.heappush(priority_queue, Node(neighbor, heuristic[neighbor]))
-                if neighbor not in path:
-                    path[neighbor] = current_node
-
-        # -------------------------------
-        # Phase 2: Then explore neighbors from different regions
-        # -------------------------------
-        for neighbor in graph[current_node]:
-            if neighbor not in visited and region_map[neighbor] != current_region:
+            if neighbor not in visited:
                 heapq.heappush(priority_queue, Node(neighbor, heuristic[neighbor]))
                 if neighbor not in path:
                     path[neighbor] = current_node
@@ -100,7 +84,7 @@ def reconstruct_path(path, start, goal):
 # ----------------------------------------------
 # Visualize the graph and highlight the final path
 # ----------------------------------------------
-def visualize_graph(graph, path, pos, region_map):
+def visualize_graph(graph, path, pos):
     G = nx.Graph()
 
     # Build edges from the adjacency list
@@ -123,11 +107,7 @@ def visualize_graph(graph, path, pos, region_map):
         nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color='green', width=3)
         nx.draw_networkx_nodes(G, pos, nodelist=path, node_color='lightgreen')
 
-    # Annotate nodes with their region IDs below their labels
-    for node, region in region_map.items():
-        plt.text(pos[node][0], pos[node][1] - 0.2, f"Region {region}", fontsize=12, color='black')
-
-    plt.title("Greedy Best-First Search for Hierarchical Routing", size=20)
+    plt.title("Greedy Best-First Search Path", size=20)
     plt.show()
 
 
@@ -140,7 +120,7 @@ graph = {
     'C': ['F', 'G'],
     'D': ['H'],
     'E': ['I', 'J'],
-    'F': ['K', 'M', 'E'],   # F connects across regions
+    'F': ['K', 'M', 'E'],   # F connects to nodes in multiple branches
     'G': ['L', 'M'],
     'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': []
 }
@@ -154,17 +134,6 @@ heuristic = {
 }
 
 # ----------------------------------------------
-# Region mapping for hierarchical search
-# ----------------------------------------------
-region_map = {
-    'A': 1, 'B': 1, 'C': 1,   # Region 1
-    'D': 2, 'E': 2,           # Region 2
-    'F': 3, 'G': 3,           # Region 3
-    'H': 2, 'I': 2, 'J': 2,   # Region 2
-    'K': 3, 'L': 3, 'M': 3    # Region 3
-}
-
-# ----------------------------------------------
 # Node positions for visualization
 # ----------------------------------------------
 pos = {
@@ -175,14 +144,14 @@ pos = {
 }
 
 # ----------------------------------------------
-# Run the hierarchical greedy best-first search
+# Run the greedy best-first search
 # ----------------------------------------------
 start_node = 'A'
 goal_node = 'M'
-result_path = greedy_best_first_search_hierarchical(graph, start_node, goal_node, heuristic, region_map)
+result_path = greedy_best_first_search(graph, start_node, goal_node, heuristic)
 
 # Print the result
 print(f"Path from {start_node} to {goal_node}: {result_path}")
 
 # Visualize the graph and the resulting path
-visualize_graph(graph, result_path, pos, region_map)
+visualize_graph(graph, result_path, pos)
