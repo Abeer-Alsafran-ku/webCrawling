@@ -202,11 +202,11 @@ if __name__ == "__main__":
     src = "https://www.cs.ku.edu.kw"
     stime = time.time()
     # Crawl one depth level, same domain only, visualize each subgraph while growing
-    G = save_crawling(src, max_depth=1, same_domain=True, delay_sec=0.0, visualize_each=False)
+    G = save_crawling(src, max_depth=2, same_domain=True, delay_sec=0.0, visualize_each=False)
     etime = time.time()
     print(f"Crawling completed in {etime - stime:.2f} seconds.")
     # Save the graph for later analysis
-    with open("crawled_graph1.gpickle", "wb") as f:
+    with open("crawled_graph2.gpickle", "wb") as f:
         pickle.dump(G, f)
 
     print(f"Crawled nodes: {len(G.nodes())}, edges: {len(G.edges())}")

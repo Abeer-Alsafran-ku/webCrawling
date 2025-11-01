@@ -126,14 +126,15 @@ def visualize_graph(graph, path, pos):
 # ----------------------------------------------
 # Graph Definition (Adjacency List)
 # ----------------------------------------------
-with open("crawled_graph1.gpickle", "rb") as f:
+# with open("crawled_graph1.gpickle", "rb") as f: # Depth = 1 
+with open("crawled_graph2.gpickle", "rb") as f: # Depth = 2 
     graph = pickle.load(f)
 
 # ----------------------------------------------
 # Heuristic values (e.g., estimated distance to goal)
 # ----------------------------------------------
 # goal_node = 'Autonomous Vehicular Networks'
-goal_node = 'Abeer Alsafran'
+goal_node = 'iReview'
 
 heuristic = analyze_graph(graph, goal_node)
 
