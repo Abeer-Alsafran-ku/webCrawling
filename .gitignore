@@ -1,3 +1,4 @@
 crawled_graph1.gpickle
 crawled_graph2.gpickle
 heuristic_scores.txt
+*.gpickle
