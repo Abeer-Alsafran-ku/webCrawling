@@ -127,36 +127,36 @@ def visualize_graph(graph, path, pos):
 # Graph Definition (Adjacency List)
 # ----------------------------------------------
 # with open("crawled_graph1.gpickle", "rb") as f: # Depth = 1 
-with open("crawled_graph2.gpickle", "rb") as f: # Depth = 2 
-    graph = pickle.load(f)
+# with open("crawled_graph2.gpickle", "rb") as f: # Depth = 2 
+#     graph = pickle.load(f)
 
 # ----------------------------------------------
 # Heuristic values (e.g., estimated distance to goal)
 # ----------------------------------------------
 # goal_node = 'Autonomous Vehicular Networks'
-goal_node = 'iReview'
+# goal_node = 'iReview'
 
-heuristic = analyze_graph(graph, goal_node)
+# heuristic = analyze_graph(graph, goal_node)
 
-# ----------------------------------------------
-# Node positions for visualization
-# ----------------------------------------------
-pos = nx.spring_layout(graph, seed=42)
+# # ----------------------------------------------
+# # Node positions for visualization
+# # ----------------------------------------------
+# pos = nx.spring_layout(graph, seed=42)
 
-# ----------------------------------------------
-# Run the greedy best-first search
-# ----------------------------------------------
-start_node = 'https://www.cs.ku.edu.kw'
-stime = time.time()
-result_path = greedy_best_first_search(graph, start_node, goal_node, heuristic)
-etime = time.time()
-print(f"Greedy Best-First Search took {etime - stime:.4f} seconds.")
-# Print the result
-print(f"Path from {start_node} to {goal_node}: {result_path}")
-# print(f"Path from {start_node} to {goal_node}: {result_path} and the score is {heuristic[goal_node]}")
-# from array to graph
-if result_path:
-    nx_path = nx.path_graph(result_path)
-    print("Resulting path as graph edges:", nx_path.edges())
-    # Visualize the graph and the resulting path
-    visualize_graph(nx_path, result_path, pos)
+# # ----------------------------------------------
+# # Run the greedy best-first search
+# # ----------------------------------------------
+# start_node = 'https://www.cs.ku.edu.kw'
+# stime = time.time()
+# result_path = greedy_best_first_search(graph, start_node, goal_node, heuristic)
+# etime = time.time()
+# print(f"Greedy Best-First Search took {etime - stime:.4f} seconds.")
+# # Print the result
+# print(f"Path from {start_node} to {goal_node}: {result_path}")
+# # print(f"Path from {start_node} to {goal_node}: {result_path} and the score is {heuristic[goal_node]}")
+# # from array to graph
+# if result_path:
+#     nx_path = nx.path_graph(result_path)
+#     print("Resulting path as graph edges:", nx_path.edges())
+#     # Visualize the graph and the resulting path
+#     visualize_graph(nx_path, result_path, pos)
