@@ -15,7 +15,6 @@ def main():
     while user_input != "exit":
         if user_input == "exit":
             break
-
         if user_input == "1":
             src = input("Enter the start node: ")
             if src[:7] != "https://" and len(src) < 10:
@@ -39,7 +38,14 @@ def main():
                 print("Resulting path as graph edges:", nx_path.edges())
                 # Visualize the graph and the resulting path
                 visualize_graph(nx_path, result_path, pos)
-        user_input = input("To run the greedy best-first search, type '1'\nTo exit, type 'exit'\n-> ")
-        
+        elif user_input == "2":
+            print("You have chosen A* search.")
+        else:
+            print("Invalid input. Please try again.")
+
+        user_input = input("To run the greedy best-first search, type '1'\nTo run A* search, type '2'\nTo exit, type 'exit'\n-> ")
+# ----------------------------------------------
+
+
 if __name__ == "__main__":
     main()
