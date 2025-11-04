@@ -29,6 +29,13 @@ def main():
             result_path = greedy_best_first_search(graph, src, dest, heuristic)
             etime = time.time()
             print(f"Greedy Best-First Search took {etime - stime:.4f} seconds.")
+            
+            # check if result_path is None
+            if not result_path:  # Goal not found
+                print(f"Goal node '{dest}' could not be resolved in the graph.")
+                user_input = input("~~~~\nTo run the greedy best-first search, type '1'\nTo run A* search, type '2'\nTo exit, type 'exit'\n~~~~-> ")
+                continue
+
             # Print the result
             print(f"Path from {src} to {dest}: {result_path}")
             # print(f"Path from {start_node} to {goal_node}: {result_path} and the score is {heuristic[goal_node]}")

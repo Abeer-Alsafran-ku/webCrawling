@@ -37,13 +37,10 @@ def greedy_best_first_search(graph, start, goal, heuristic):
         goal: str - target node
         heuristic: dict - heuristic values for each node
     """
-    # Resolve the textual goal description into an actual node in the graph.
-    # We only need to run the similarity check once; doing so inside the main
-    # loop forced us to rescan the entire graph on every iteration, effectively
-    # stalling the search when a match was found.
+    # Check if goal can be resolved
     resolved_goal = check_similarity(graph, goal, heuristic)
     if not resolved_goal:
-        return None
+        return None # Goal not found in graph
 
     # Initialize priority queue with the start node (using its heuristic as priority)
     priority_queue = []
@@ -54,7 +51,7 @@ def greedy_best_first_search(graph, start, goal, heuristic):
 
     # Continue exploring while there are nodes in the queue
     while priority_queue:
-        # Pop the node with the smallest heuristic value
+        # Pop the node 
         current_node = heapq.heappop(priority_queue).name
 
         # Goal test: stop when we reach the target
