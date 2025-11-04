@@ -1,7 +1,7 @@
 import pickle
 import networkx as nx
 import matplotlib.pyplot as plt
-from h import analyze_graph
+from best_first.h import analyze_graph
 
 
 # ----------------------------------------------

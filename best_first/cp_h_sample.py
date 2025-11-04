@@ -7,8 +7,8 @@ import heapq
 import pickle
 import networkx as nx      # For graph visualization
 import matplotlib.pyplot as plt   # For plotting the graph
-from h import analyze_graph
-from prog import check_similarity
+from best_first.h import analyze_graph
+from best_first.prog import check_similarity
 
 # ----------------------------------------------
 # Node class to store a node's name and heuristic value

@@ -1,6 +1,6 @@
-from cp_h_sample import greedy_best_first_search,visualize_graph
+from best_first.cp_h_sample import greedy_best_first_search,visualize_graph
 import pickle
-from h import analyze_graph
+from best_first.h import analyze_graph
 import time
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 def main():
 
-    user_input = input("To run the greedy best-first search, type '1'\nTo exit, type 'exit'\n-> ")
+    user_input = input("~~~~\nTo run the greedy best-first search, type '1'\nTo run A* search, type '2'\nTo exit, type 'exit'\n~~~~-> ")
 
     while user_input != "exit":
         if user_input == "exit":
@@ -21,7 +21,7 @@ def main():
                 print("Please enter a valid URL starting with http or https:// or enter a full URL.")
                 continue
             dest = input("Enter the goal node (can be a description): ")
-            with open("crawled_graph2.gpickle", "rb") as f: # Depth = 2 
+            with open("best_first/crawled_graph2.gpickle", "rb") as f: # Depth = 2  
                 graph = pickle.load(f)
             heuristic = analyze_graph(graph, dest)
             pos = nx.spring_layout(graph)
@@ -43,7 +43,7 @@ def main():
         else:
             print("Invalid input. Please try again.")
 
-        user_input = input("To run the greedy best-first search, type '1'\nTo run A* search, type '2'\nTo exit, type 'exit'\n-> ")
+        user_input = input("~~~~\nTo run the greedy best-first search, type '1'\nTo run A* search, type '2'\nTo exit, type 'exit'\n~~~~-> ")
 # ----------------------------------------------
 
 
