@@ -4,7 +4,8 @@ from best_first.h import analyze_graph
 import time
 import networkx as nx
 import matplotlib.pyplot as plt
-
+from best_first.crawler_graph import save_crawling
+import os
 
 # ----------------------------------------------
 
@@ -21,10 +22,15 @@ def main():
                 print("Please enter a valid URL starting with http or https:// or enter a full URL.")
                 continue
             dest = input("Enter the goal node (can be a description): ")
-            with open("best_first/crawled_graph2.gpickle", "rb") as f: # Depth = 2  
-                graph = pickle.load(f)
+            if os.path.exists("best_first/crawled_graph2.gpickle") == False or src != "https://www.cs.ku.edu.kw":
+                print("Crawling the web to create the graph...")
+                graph = save_crawling(src, max_depth=1, same_domain=True, delay_sec=0.0, visualize_each=False)
+            else: 
+                with open("best_first/crawled_graph2.gpickle", "rb") as f: # Depth = 2  
+                    graph = pickle.load(f)
             heuristic = analyze_graph(graph, dest)
             pos = nx.spring_layout(graph)
+            print("Running greedy best-first search...")
             stime = time.time()
             result_path = greedy_best_first_search(graph, src, dest, heuristic)
             etime = time.time()
