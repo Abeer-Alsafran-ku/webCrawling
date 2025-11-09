@@ -64,8 +64,8 @@ def analyze_graph(graph, keyword):
         prev = heuristic_scores.get(v, float('-inf'))
         heuristic_scores[v] = max(prev, score)
 
-        with open("heuristic_scores.txt", "a") as f:
-            f.write(f"Edge {u} -> {v} | link:{occr_goal_key_in_link_text} para:{occr_in_surr_paragraph} body:{occr_in_body} links_like:{number_of_links_containing_similar_keyword} => score:{score}\n")
+        # with open("heuristic_scores.txt", "a") as f:
+        #     f.write(f"Edge {u} -> {v} | link:{occr_goal_key_in_link_text} para:{occr_in_surr_paragraph} body:{occr_in_body} links_like:{number_of_links_containing_similar_keyword} => score:{score}\n")
 
     return heuristic_scores
 
