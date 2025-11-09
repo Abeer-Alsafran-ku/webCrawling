@@ -5,6 +5,10 @@ Web crawling using hueristic search (A* and Greedy Best-First Search Algorithm)
 
 This project implements a web crawler that navigates web pages using the **Greedy Best First Search (GBFS)** algorithm. The crawler prioritizes links based on a heuristic function, aiming to efficiently reach target pages or maximize coverage based on link relevance.  
 
+# Web Crawler using A* Search
+
+Our approach is to treat each page as a node and each link as an edge. The crawler then assigns a value to each link on the page based on its relevance as per the heuristic function. 
+
 ## Features
 - Greedy Best First Search-based crawling.
 - Configurable start URL and target keywords.
@@ -22,6 +26,10 @@ webCrawling/
     ├── prog.py # Utility functions (e.g., URL normalization, request handling)
     ├── config.py # Configuration file (start URL, target keywords, max depth, etc.)
     └──  requirements.txt # Python dependencies
+  AStar/
+    ├── AStarCrawler.py
+    ├── AStarHelperFunctions.py
+    └── AStarHeuristicFunction.py
 └──  README.md # Project documentation
 ```
 
@@ -29,7 +37,7 @@ webCrawling/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/web-crawler-gbfs.git
+git clone https://github.com/Abeer-Alsafran-ku/webCrawling.git
 cd webCrawling
 pip install -r requirements.txt
 python main.py
