@@ -129,23 +129,23 @@ def show_subgraph(G, H):
 # ----------------------------------------------
 # Main execution
 # ----------------------------------------------
-if __name__ == "__main__":
-    src = "https://www.cs.ku.edu.kw"  # replace with the source URL
-    keyword = "Alumni"  # replace with the target keyword
+# if __name__ == "__main__":
+#     src = "https://www.cs.ku.edu.kw"  # replace with the source URL
+#     keyword = "Alumni"  # replace with the target keyword
 
 
-    print("\n\n\nCreating graph from source URL...\n\n\n")
+#     print("\n\n\nCreating graph from source URL...\n\n\n")
 
-    with open("crawled_graph3.gpickle", "rb") as f:
-        graph = nx.read_gpickle(f)
+#     with open("crawled_graph3.gpickle", "rb") as f:
+#         graph = nx.read_gpickle(f)
 
-    print("\n\n\nAnalyzing graph for heuristic scores...\n\n\n")
-    scores = analyze_graph(graph, keyword)
+#     print("\n\n\nAnalyzing graph for heuristic scores...\n\n\n")
+#     scores = analyze_graph(graph, keyword)
 
-    # for link, score in scores.items():
-    #     print(f"Link: {link}, Heuristic Score: {score}")
+#     # for link, score in scores.items():
+#     #     print(f"Link: {link}, Heuristic Score: {score}")
 
-    visualize_graph_with_top3(graph,scores)
-    # print(graph.edges(data=True))
+#     visualize_graph_with_top3(graph,scores)
+#     # print(graph.edges(data=True))
 
 
