@@ -21,6 +21,8 @@ def main():
             if src[:7] != "https://" and len(src) < 10:
                 print("Please enter a valid URL starting with http or https:// or enter a full URL.")
                 continue
+            if src[-1] == '/':
+                src = src[:-1]
             dest = input("Enter the goal node (can be a description): ")
             if os.path.exists("best_first/crawled_graph2.gpickle") == False or src != "https://www.cs.ku.edu.kw":
                 print("Crawling the web to create the graph...")
