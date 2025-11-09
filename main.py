@@ -1,4 +1,4 @@
-from best_first.cp_h_sample import greedy_best_first_search,visualize_graph
+﻿from best_first.cp_h_sample import greedy_best_first_search,visualize_graph
 import pickle
 from best_first.h import analyze_graph
 import time
@@ -6,7 +6,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from best_first.crawler_graph import save_crawling
 import os
-
+from AStar.AStarCrawler import a_star_web_crawl
 # ----------------------------------------------
 
 def main():
@@ -53,6 +53,23 @@ def main():
                 visualize_graph(nx_path, result_path, pos)
         elif user_input == "2":
             print("You have chosen A* search.")
+            startsite = input("Enter the start node: ")
+            if startsite[:7] != "https://" and len(startsite) < 10:
+                print("Please enter a valid URL starting with http or https:// or enter a full URL.")
+                continue
+            goalsite = input("Enter the goal node (can be a description): ")
+            topic_description = "computer science kuwait university faculty research capstone Exam time people alumni تخصص"
+
+            a_star_result_path = a_star_web_crawl(
+                                        startsite,
+                                        goalsite,
+                                        topic_description,
+                                        maximum_pages_to_visit=200,
+                                        maximum_child_links_per_page=100,
+                                        requests_timeout_seconds=5,
+                                        depth_penalty_per_level=75.0
+                                    )
+            print(a_star_result_path)
         else:
             print("Invalid input. Please try again.")
 
