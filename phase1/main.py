@@ -24,18 +24,24 @@ def main():
             if src[-1] == '/':
                 src = src[:-1]
             dest = input("Enter the goal node (can be a description): ")
-            if os.path.exists("best_first/crawled_graph2.gpickle") == False or src != "https://www.cs.ku.edu.kw":
+            if os.path.exists("best_first/crawled_graph2.gpickle") == True or src != "https://www.cs.ku.edu.kw":
                 print("Crawling the web to create the graph...")
-                graph = save_crawling(src, max_depth=1, same_domain=True, delay_sec=0.0, visualize_each=False)
+                # graph = save_crawling(src, max_depth=1, same_domain=True, delay_sec=0.0, visualize_each=False)
             else: 
                 with open("best_first/crawled_graph2.gpickle", "rb") as f: # Depth = 2  
                     graph = pickle.load(f)
+            # heuristic = analyze_graph(graph, dest)
+            print("Running greedy best-first search...")
+            # pos = nx.spring_layout(graph)
+
+            # Measure time taken for greedy best-first search
+            stime = time.time()
+            graph = save_crawling(src, max_depth=1, same_domain=True, delay_sec=0.0, visualize_each=False)
             heuristic = analyze_graph(graph, dest)
             pos = nx.spring_layout(graph)
-            print("Running greedy best-first search...")
-            stime = time.time()
             result_path = greedy_best_first_search(graph, src, dest, heuristic)
             etime = time.time()
+            
             print(f"Greedy Best-First Search took {etime - stime:.4f} seconds.")
             
             # check if result_path is None
