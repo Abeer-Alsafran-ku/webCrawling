@@ -100,31 +100,29 @@ with open('ai_related_webpages.txt','r') as f :
             break
         links_arr.append(links.strip())
 
-# dataset file 
-fd =  open('dataset.csv','a')
-if fd :
-    pass
-else :
-    fd.write('text,label\n')
+with open('dataset.csv', 'a') as fd:
+    # step 1 : loop over the urls and make a request
+    for link in links_arr:
+        # step 2 : save the content of the html page
+        if not link.startswith('https:'):
+            link = link[4:]
 
+        try:
+            resp = safe_request("GET", link)
+        except requests.exceptions.HTTPError as e:
+            print(f"Skipping {link} due to HTTP error: {e}")
+            continue
+        except Exception as e:
+            print(f"Skipping {link} due to unexpected error: {e}")
+            continue
 
-# step 1 : loop over the urls and make a request 
-for link in links_arr:
-    # step 2 : save the content of the html page
-    if link.startswith('https:'):
-        
-        resp = safe_request("GET",link)
-    else:
-        link = link[4:]
-        resp = safe_request("GET",link)
-    
-    html = resp.content
-    soup = BeautifulSoup(html,'html.parser')
-    content = soup.find_all('body')
+        html = resp.content
+        soup = BeautifulSoup(html,'html.parser')
+        content = soup.find_all('body')
 
-    # step 3 : write the content and label it as 1 to the dataset csv file
-    fd.write(f'{content},1\n')
-    
-    print(type(link))
-    
+        # step 3 : write the content and label it as 1 to the dataset csv file
+        fd.write(f'{content},1\n')
+
+        print(type(link))
+
 print('done')
