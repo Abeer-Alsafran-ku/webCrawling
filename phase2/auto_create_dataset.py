@@ -121,7 +121,7 @@ with open('dataset.csv', 'a') as fd:
         content = soup.find_all('body')
 
         # step 3 : write the content and label it as 1 to the dataset csv file
-        fd.write(f'{content},1\n')
+        fd.write(f'[{content}],1\n')
 
         print(type(link))
 
