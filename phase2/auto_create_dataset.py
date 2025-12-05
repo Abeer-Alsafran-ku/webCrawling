@@ -102,6 +102,7 @@ with open('ai_related_webpages.txt','r') as f :
         links_arr.append(links.strip())
 
 with open('dataset.csv', 'a', newline='', encoding='utf-8') as fd:
+    
     writer = csv.writer(fd, quoting=csv.QUOTE_ALL)
     # step 1 : loop over the urls and make a request
     for link in links_arr:
