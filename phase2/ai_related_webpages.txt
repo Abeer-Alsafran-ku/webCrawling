@@ -1,0 +1,120 @@
+https://www.deeplearning.ai
+https://www.coursera.org/learn/machine-learning
+https://www.fast.ai
+https://www.fast.ai/posts/2022-07-05-launch
+https://www.cs.cmu.edu/~tom/mlbook.html
+https://www.cs.ubc.ca/~murphyk/MLbook
+https://www.bishopbook.com
+https://distill.pub
+https://www.kdnuggets.com
+https://towardsdatascience.com
+https://developers.google.com/machine-learning/crash-course
+https://ai.google/education
+https://www.tensorflow.org/tutorials
+https://www.tensorflow.org/guide
+https://keras.io
+https://pytorch.org
+https://docs.pytorch.org/tutorials/index.html
+https://docs.pytorch.org/tutorials/beginner/pytorch_with_examples.html
+https://scikit-learn.org/stable/tutorial/index.html
+20. https://scikit-learn.org/stable/user_guide.html
+21. https://machinelearningmastery.com
+22. https://www.analyticsvidhya.com/blog
+23. https://www.datacamp.com/blog
+24. https://www.tableau.com/learn/articles/data-science-blogs
+25. https://draft.dev/learn/best-data-science-machine-learning-and-ai-blogs
+26. https://www.analyticsvidhya.com/blog/2024/02/data-science-blogs
+27. https://www.geeksforgeeks.org/machine-learning
+28. https://www.geeksforgeeks.org/deep-learning
+29. https://www.geeksforgeeks.org/data-science-tutorial
+30. https://www.geeksforgeeks.org/artificial-intelligence
+31. https://www.kaggle.com
+32. https://www.kaggle.com/learn/overview
+33. https://www.kaggle.com/discussions/general/366932
+34. https://www.datacamp.com/tutorial/pytorch-vs-tensorflow-vs-keras
+35. https://www.microsoft.com/en-us/ai
+36. https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-machine-learning
+37. https://aws.amazon.com/machine-learning
+38. https://cloud.google.com/products/ai
+39. https://cloud.google.com/bigquery-ml/docs/tutorials
+40. https://www.ibm.com/watson/resources
+41. https://spinningup.openai.com/en/latest
+42. https://huggingface.co/learn/deep-rl-course/en/unit0/introduction
+43. https://docs.pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
+44. https://web.stanford.edu/class/cs234
+45. https://www.coursera.org/learn/fundamentals-of-reinforcement-learning
+46. https://datamachines.xyz/the-hands-on-reinforcement-learning-course-page
+47. https://matlabacademy.mathworks.com/details/reinforcement-learning-onramp/reinforcementlearning
+48. https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893
+49. https://stable-baselines3.readthedocs.io
+50. https://gymnasium.farama.org
+51. https://www.datacamp.com
+52. https://www.coursera.org/specializations/deep-learning
+53. https://www.coursera.org/specializations/data-science-python
+54. https://www.edx.org/learn/artificial-intelligence
+55. https://www.edx.org/learn/data-science
+56. https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2020
+57. https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020
+58. https://www.cs.ox.ac.uk/people/nando.defreitas/machinelearning
+59. https://www.youtube.com/@3Blue1Brown
+60. https://www.youtube.com/@StatQuest
+61. https://arxiv.org/list/cs.LG/recent
+62. https://arxiv.org/list/cs.AI/recent
+63. https://paperswithcode.com
+64. https://paperswithcode.com/area/reinforcement-learning
+65. https://scholar.google.com
+66. https://allenai.org
+67. https://aaai.org
+68. https://www.aiethicist.org/ai-organizations
+69. https://learnprompting.org/blog/resources_latest_research_papers
+70. https://elicit.com
+71. https://openai.com/research
+72. https://deepmind.google/research
+73. https://research.ibm.com/artificial-intelligence
+74. https://ai.facebook.com/research
+75. https://labs.google/ai
+76. https://www.microsoft.com/en-us/research/theme/artificial-intelligence
+77. https://www.nvidia.com/en-us/research/ai
+78. https://ai.ethz.ch/education.html
+79. https://www.mpi-inf.mpg.de/departments/multimedia-signal-processing-and-learning
+80. https://www.baai.ac.cn/en
+81. https://www.datacamp.com/courses/tech:machine-learning
+82. https://www.datacamp.com/courses/tech:deep-learning
+83. https://www.tensorflow.org/resources/learn-ml
+84. https://pytorch.org/learn
+85. https://github.com/jonkrohn/DLTFpT
+86. https://github.com/ageron/handson-ml3
+87. https://github.com/rasbt/machine-learning-book
+88. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+89. https://github.com/dennybritz/reinforcement-learning
+90. https://github.com/openai/baselines
+91. https://www.analyticsvidhya.com
+92. https://www.datacamp.com/tutorial
+93. https://medium.com/tag/machine-learning
+94. https://medium.com/tag/deep-learning
+95. https://medium.com/tag/reinforcement-learning
+96. https://www.digitalocean.com/resources/articles/ai-communities-for-learning
+97. https://www.datacamp.com/tutorial/what-is-deep-learning
+98. https://www.datacamp.com/tutorial/what-is-reinforcement-learning
+99. https://www.ibm.com/topics/reinforcement-learning
+100. https://www.ibm.com/topics/neural-networks
+https://dl.acm.org/topic/artificial-intelligence
+https://www.sciencedirect.com/journal/artificial-intelligence
+https://www.jmlr.org
+https://www.nature.com/subjects/machine-learning
+https://www.nature.com/subjects/artificial-intelligence
+https://machinelearning.apple.com
+https://ai.facebook.com/blog
+https://research.adobe.com
+https://openreview.net
+https://datascience.stackexchange.com
+https://stackoverflow.com/questions/tagged/machine-learning
+https://ml-cheatsheet.readthedocs.io
+https://microsoft.github.io/ML-For-Beginners
+https://www.topbots.com
+https://h2o.ai
+https://www.datarobot.com/blog
+https://deepai.org
+https://www.kaggle.com/code
+https://colah.github.io
+https://www.ml6.eu/blog
