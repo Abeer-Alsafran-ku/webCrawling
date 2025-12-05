@@ -3,6 +3,7 @@ import requests
 
 import time
 import http.client
+import csv
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -100,7 +101,8 @@ with open('ai_related_webpages.txt','r') as f :
             break
         links_arr.append(links.strip())
 
-with open('dataset.csv', 'a') as fd:
+with open('dataset.csv', 'a', newline='', encoding='utf-8') as fd:
+    writer = csv.writer(fd, quoting=csv.QUOTE_ALL)
     # step 1 : loop over the urls and make a request
     for link in links_arr:
         # step 2 : save the content of the html page
@@ -118,10 +120,10 @@ with open('dataset.csv', 'a') as fd:
 
         html = resp.content
         soup = BeautifulSoup(html,'html.parser')
-        content = soup.find_all('body')
+        content = soup.get_text(separator=' ', strip=True)
 
         # step 3 : write the content and label it as 1 to the dataset csv file
-        fd.write(f'[{content}],1\n')
+        writer.writerow([content, 1])
 
         print(type(link))
 
