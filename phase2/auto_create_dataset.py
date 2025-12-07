@@ -94,7 +94,7 @@ def safe_request(
 links_arr = []
 
 # read from txt file the web pages links
-with open('ai_related_webpages.txt','r') as f :
+with open('non_ai_related_webpages.txt','r') as f :
     while True:
         links = f.readline()
         if not links :
@@ -124,7 +124,7 @@ with open('dataset.csv', 'a', newline='', encoding='utf-8') as fd:
         content = soup.get_text(separator=' ', strip=True)
 
         # step 3 : write the content and label it as 1 to the dataset csv file
-        writer.writerow([content, 1])
+        writer.writerow([content, 0])
 
         print(type(link))
 
