@@ -17,7 +17,7 @@ Our approach is to treat each page as a node and each link as an edge. The crawl
 
 ## File Structure
 ```text
-webCrawling/
+webCrawling/phase1
   naiev/
     └──  naiev.py # Very basic and naiev approach
   best_first/
