@@ -90,42 +90,45 @@ def safe_request(
     # If we get here, all retries failed
     raise last_exc if last_exc else RuntimeError("Unknown error during request")
 
+if __name__ == "__main__":
+    links_arr = []
+    file_arr = ['ai_related_webpages.txt','non_ai_related_webpages.txt']
+    # read from txt file the web pages links
+    for i,file in enumerate(file_arr):
+        with open(file,'r') as f :
+            while True:
+                links = f.readline()
+                if not links :
+                    break
+                links_arr.append(links.strip())
 
-links_arr = []
+        with open('dataset.csv', 'a', newline='', encoding='utf-8') as fd:
+            writer = csv.writer(fd, quoting=csv.QUOTE_ALL)
+            # step 1 : loop over the urls and make a request
+            for link in links_arr:
+                # step 2 : save the content of the html page
+                if not link.startswith('https:'):
+                    link = link[4:]
 
-# read from txt file the web pages links
-with open('non_ai_related_webpages.txt','r') as f :
-    while True:
-        links = f.readline()
-        if not links :
-            break
-        links_arr.append(links.strip())
+                try:
+                    resp = safe_request("GET", link)
+                except requests.exceptions.HTTPError as e:
+                    print(f"Skipping {link} due to HTTP error: {e}")
+                    continue
+                except Exception as e:
+                    print(f"Skipping {link} due to unexpected error: {e}")
+                    continue
 
-with open('dataset.csv', 'a', newline='', encoding='utf-8') as fd:
-    
-    writer = csv.writer(fd, quoting=csv.QUOTE_ALL)
-    # step 1 : loop over the urls and make a request
-    for link in links_arr:
-        # step 2 : save the content of the html page
-        if not link.startswith('https:'):
-            link = link[4:]
+                html = resp.content
+                soup = BeautifulSoup(html,'html.parser')
+                content = soup.get_text(separator=' ', strip=True)
 
-        try:
-            resp = safe_request("GET", link)
-        except requests.exceptions.HTTPError as e:
-            print(f"Skipping {link} due to HTTP error: {e}")
-            continue
-        except Exception as e:
-            print(f"Skipping {link} due to unexpected error: {e}")
-            continue
+                if i == 0: # ai related webpages
+                # step 3 : write the content and label it as 1 to the dataset csv file
+                    writer.writerow([content, 1])
+                else: # non ai related webpages
+                    writer.writerow([content, 0])
 
-        html = resp.content
-        soup = BeautifulSoup(html,'html.parser')
-        content = soup.get_text(separator=' ', strip=True)
+                print(f"{link} has been processed")
 
-        # step 3 : write the content and label it as 1 to the dataset csv file
-        writer.writerow([content, 0])
-
-        print(type(link))
-
-print('done')
+    print('done')
