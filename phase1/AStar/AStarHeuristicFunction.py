@@ -28,5 +28,5 @@ def estimate_child_relevance_weighted(topic_keyword_list, link_tag, all_link_tag
             sibling_keyword_links += 1
 
     
-    heuristic_score = (4 * link_text_matches) + (2 * paragraph_matches) + (1 * sibling_keyword_links)
+    heuristic_score = (5 * link_text_matches) + (3 * paragraph_matches) + (1 * sibling_keyword_links)
     return heuristic_score

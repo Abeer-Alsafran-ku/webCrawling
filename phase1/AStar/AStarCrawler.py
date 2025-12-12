@@ -114,7 +114,7 @@ def a_star_web_crawl(
                 continue
 
             # Stay within domain
-            if not is_within_domain("www.cs.ku.edu.kw", absolute_url) and not is_within_domain("cs.ku.edu.kw", absolute_url):
+            if not is_within_domain(seed_web_address, absolute_url) and not is_within_domain(seed_web_address, absolute_url):
                 continue
 
             # Skip obvious non-HTML
