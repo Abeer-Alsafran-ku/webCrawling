@@ -18,17 +18,24 @@ Our approach is to treat each page as a node and each link as an edge. The crawl
 ## File Structure
 ```text
 webCrawling/phase2
-  svm/
-    ├── crawler.py # Web crawling
-    └──  svm.py # Train and test the SVM model
-  naiveBayes/
-    ├── 
-    └── 
-  └──  README.md # Project documentation
+  ├──  main.py # Web crawling integerated with ML
+  ├──  evaluate_model.py # Test the ML models to predict the class of the webpage
+  ├──  test_model.py # Static test case 
+  ├──  train_model.py # Train the models and save the weights and the vectorizer 
+  ├──  README.md # Project documentation and usage steps
+  ├──  *_model.pkl # model weights
+  ├──  *_vectorizer.pkl # vectorizer weights 
   └──  requirements.txt # Python dependencies
-  └──  ai_related_webPages.txt # List of AI Related Web Pages
-  └──  non_ai_related_webPages.txt # List of Non-AI Related Web Pages
-  └──  auto_create_dataset.py # Automatically create the content of a list of webpages
+  ds/
+    ├──  ai_related_webPages.txt # List of AI Related Web Pages
+    ├──  non_ai_related_webPages.txt # List of Non-AI Related Web Pages
+    └──  auto_create_dataset.py # Automatically create the content of a list of webpages
+  results/
+    └──  *.png # Confusion Matrix results evaluating plot
+  AStar/
+    ├──  AStarCrawler.py # Crawler from phase 1 
+    └──  AStarHelperFunctions.py # Helper functions for AStarCrawler.py
+  ├── report.pdf # A report for this project 
   └──  dataset.csv # A dataset consist of the body of AI related and non related web pages and the label 0: non related | 1: related 
 ```
 
@@ -36,13 +43,16 @@ webCrawling/phase2
 
 ### 1. Clone the repository
 ```bash
-download the file
-cd phase2/
+download the file or git clone https://github.com/Abeer-Alsafran-ku/webCrawling.git 
+cd webCrawling/phase2/
 pip install -r requirements.txt
-python main.py
+python main.py <SVM|DT|MNB|GNB> #for integrates crawler 
+python evaluate_model.py #for evaluating classifiers
+python train_model.py #for train the models 
+python test_model.py #for testing models
 ```
 
-## How SVM Works in This Crawler
+## How SVM and other models Works in This Crawler
 
 The SVM will classify the web page if it is AI related web page, or Non AI related page.
 

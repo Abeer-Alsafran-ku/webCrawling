@@ -3,3 +3,7 @@ networkx
 scikit-learn
 pickle
 requests
+joblib
+pandas
+nltk
+beautifulsoup4

@@ -1,5 +1,5 @@
 import joblib
-from svm import clean_text
+from evaluate_model import clean_text
 import time
 
 
