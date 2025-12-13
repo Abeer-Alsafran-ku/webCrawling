@@ -23,14 +23,8 @@ HEADERS = {
 # Load ML Model + Vectorizer
 # -------------------------
 PHASE2_DIR = Path(__file__).resolve().parents[1]  # .../phase2/
-MNB_MODEL_PATH = PHASE2_DIR / "MNB_model.pkl"
-MNB_VECTORIZER_PATH = PHASE2_DIR / "tfidf_MNB_vectorizer.pkl"
 
-mnb_model = joblib.load(MNB_MODEL_PATH)
-mnb_vectorizer = joblib.load(MNB_VECTORIZER_PATH)
-
-
-def score_link_with_mnb(link_tag):
+def score_link_with_mnb(link_tag,model_type):
     """
     Score a link using ONLY the MNB model probability
     on the link's local textual context (anchor + nearby text).
@@ -38,6 +32,32 @@ def score_link_with_mnb(link_tag):
     Returns a heuristic in roughly [0, 1000].
     """
     pieces = []
+    if model_type == 'MNB':
+        MNB_MODEL_PATH = PHASE2_DIR / "MNB_model.pkl"
+        MNB_VECTORIZER_PATH = PHASE2_DIR / "tfidf_MNB_vectorizer.pkl"
+
+        model = joblib.load(MNB_MODEL_PATH)
+        vectorizer = joblib.load(MNB_VECTORIZER_PATH)
+    elif model_type == 'SVM':
+        SVM_MODEL_PATH = PHASE2_DIR / "SVM_model.pkl"
+        SVM_VECTORIZER_PATH = PHASE2_DIR / "tfidf_SVM_vectorizer.pkl"
+
+        model = joblib.load(SVM_MODEL_PATH)
+        vectorizer = joblib.load(SVM_VECTORIZER_PATH)
+    elif model_type == 'GNB':
+        GNB_MODEL_PATH = PHASE2_DIR / "GNB_model.pkl"
+        GNB_VECTORIZER_PATH = PHASE2_DIR / "tfidf_GNB_vectorizer.pkl"
+
+        model = joblib.load(GNB_MODEL_PATH)
+        vectorizer = joblib.load(GNB_VECTORIZER_PATH)
+    elif model_type == 'DT':
+        DT_MODEL_PATH = PHASE2_DIR / "DT_model.pkl"
+        DT_VECTORIZER_PATH = PHASE2_DIR / "tfidf_DT_vectorizer.pkl"
+
+        model = joblib.load(DT_MODEL_PATH)
+        vectorizer = joblib.load(DT_VECTORIZER_PATH)
+    else:
+        raise ValueError("Unsupported model type for scoring link.")
 
     if link_tag:
         # Anchor text
@@ -59,14 +79,14 @@ def score_link_with_mnb(link_tag):
     if not combined_text:
         return 0.0
 
-    X = mnb_vectorizer.transform([combined_text]).toarray()
+    X = vectorizer.transform([combined_text]).toarray()
 
-    if hasattr(mnb_model, "predict_proba"):
+    if hasattr(model, "predict_proba"):
         # Probability of the "AI-related / relevant" class (index 1)
-        ml_score = float(mnb_model.predict_proba(X)[0][1])  # 0..1
+        ml_score = float(model.predict_proba(X)[0][1])  # 0..1
     else:
         # Fallback to predicted label in {0,1}
-        label = int(mnb_model.predict(X)[0])
+        label = int(model.predict(X)[0])
         ml_score = float(label)
 
     # Scale to a 0..1000-ish range for compatibility with old heuristic scale
@@ -82,6 +102,7 @@ def a_star_web_crawl(
     requests_timeout_seconds=5,
     depth_penalty_per_level=75.0,
     base_domain=None,  # optional base domain
+    model_type='MNB'
 ):
 
     start_time_seconds = time.time()
@@ -203,7 +224,7 @@ def a_star_web_crawl(
             child_depth = current_depth + 1
 
             # ML-only heuristic based on link context
-            heur = score_link_with_mnb(link)
+            heur = score_link_with_mnb(link,model_type)
 
             candidates.append((heur, absolute_url, child_depth))
 

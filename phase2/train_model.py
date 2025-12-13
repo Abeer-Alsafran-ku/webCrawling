@@ -11,9 +11,10 @@ from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix,classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix,classification_report,ConfusionMatrixDisplay
 import joblib
 import time
+import matplotlib.pyplot as plt
 
 # Ensure required NLTK resources are available (handles first run setups)
 def ensure_nltk_resource(resource_name, resource_path):
@@ -30,7 +31,25 @@ ensure_nltk_resource('punkt_tab', 'tokenizers/punkt_tab')
 # Initialize stopwords set
 stop_words = set(stopwords.words('english'))
 
+def plot_cm(classifier, X_test, y_test, class_names,model_type):
+    titles_options = [
+    (f"Confusion matrix for {model_type}", None),]
 
+    for title, normalize in titles_options:
+        disp = ConfusionMatrixDisplay.from_estimator(
+            classifier,
+            X_test,
+            y_test,
+            display_labels=class_names,
+            cmap=plt.cm.Blues,
+            normalize=normalize,
+        )
+        disp.ax_.set_title(title)
+
+        print(title)
+        print(disp.confusion_matrix)
+
+    plt.show()
 
 # Define a function to clean text
 def clean_text(text):
@@ -100,6 +119,8 @@ if __name__ == "__main__":
         y_pred = model.predict(X_test.toarray())
         # Make predictions with the loaded model (requires dense arrays)
         model_predictions = model.predict(X_test.toarray())
+        X_test = X_test.toarray()
+
    
     else:
         model.fit(X_train, y_train)
@@ -119,4 +140,5 @@ if __name__ == "__main__":
     filename = f'{model_type}_model.pkl'
     joblib.dump(model, filename)
     print(f"Model saved as {filename}")
+    plot_cm(model, X_test, y_test, class_names=['Not AI', 'AI'],model_type=model_type)
 

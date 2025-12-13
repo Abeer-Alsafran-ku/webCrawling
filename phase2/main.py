@@ -1,58 +1,64 @@
-import time
-import requests
-from auto_create_dataset import safe_request
-import bs4
-from svm import clean_text
-import joblib
+﻿# phase2/AStarCrawlerWithMLTest.py
+
+import sys
+from pathlib import Path
+
+CURRENT_DIR = Path(__file__).resolve().parent       # .../phase2/
+ASTAR_DIR = CURRENT_DIR / "AStar"
+
+sys.path.append(str(ASTAR_DIR))
+
+from AStar.AStarCrawler import a_star_web_crawl
+
+
+def main(args):
+    if len(args) < 1:
+        print("Usage: python main.py <model_type: MNB|SVM|GNB|DT>")
+        return
+    
+    model_type = args[0]  # Accept model type from command line
+
+    print(f"=== A* Crawler Test ({model_type} Model) ===\n")
+
+    base_domain = input("Enter the base domain (e.g. en.wikipedia.org | can be empty):\n> ").strip()
+    # You can leave this empty to let the crawler derive it from the seed URL.
+
+    seed_url = input("\nEnter the seed URL to begin crawling from:\n> ").strip()
+    if not seed_url:
+        print("Seed URL required.")
+        return
+
+    target_phrase = input("\nEnter the target phrase you want the crawler to find:\n> ").strip()
+    if not target_phrase:
+        print("Target phrase required.")
+        return
+
+    print("\n=== CONFIGURATION ===")
+    print(f"Base domain:   {base_domain or '(auto from seed URL i.e. can be empty)'}")
+    print(f"Seed URL:      {seed_url}")
+    print(f"Target phrase: {target_phrase}")
+    print("=====================\n")
+
+    print("Running crawler...\n")
+
+    result = a_star_web_crawl(
+        seed_web_address=seed_url,
+        target_phrase=target_phrase,
+        maximum_pages_to_visit=30,
+        maximum_child_links_per_page=12,
+        requests_timeout_seconds=5,
+        base_domain=base_domain or None,
+        model_type='MNB'
+    )
+
+    print("\n=== RESULT ===")
+    if result is None:
+        print("Crawler did NOT find the target phrase.")
+    else:
+        print("Crawler found a path:")
+        for step in result:
+            print(" ", step)
+
 
 if __name__ == "__main__":
-    # step 1 : get URL from user input
-    url = input("Enter the URL to fetch: ")
-    try:
-        response = safe_request("GET", url)
-        print("Request successful!")
-        print("Response content:")
-        # print(response.text)
-        # step 2 : extract the content of the html page
-        soup = bs4.BeautifulSoup(response.content, 'html.parser')
-        title = soup.title.string if soup.title else 'No title found'
-        # print(f"Page Title: {title}")
-        heading = soup.find('h1')
-        if heading:
-            print(f"Main h1 Heading: {heading.get_text()}")
-        elif soup.find('h2'):
-            heading = soup.find('h2')
-            # print(f"Main h2 Heading: {heading.get_text()}")
-        elif soup.find('h3'):
-            heading = soup.find('h3')
-            # print(f"Main h3 Heading: {heading.get_text()}")
-        else:
-            print("No main heading found.")
-        body_text = soup.get_text(separator=' ', strip=True)
-        # print(f"Body Text: {body_text[:500]}...")  # Print first
-    except Exception as e:
-        print(f"Request failed: {e}")
-
-    # concat the title, heading, and body text
-    full_content = f"{title} {heading.get_text() if heading else ''} {body_text}"
-    print(f"Full Content: {full_content[:500]}...")  # Print first 500 characters
-
-    # step 3 : Classify the content using the trained model
-    # Load the model and vectorizer
-    with open('svc_model.pkl', 'rb') as file_model:
-        model = joblib.load(file_model)
-    with open('tfidf_vectorizer.pkl', 'rb') as file_vectorizer:
-        vectorizer = joblib.load(file_vectorizer)
-    # Preprocess the content
-    cleaned_content = clean_text(full_content)
-    # Vectorize the content
-    vectorized_content = vectorizer.transform([cleaned_content])
-    # Make prediction
-    prediction = model.predict(vectorized_content)
-
-    if prediction[0] == '1':
-        print(f"\nPrediction: {prediction[0]}\n Meaning the content of the web page {url} is related to AI")  # Assuming binary classification: 0 or 1
-    elif prediction[0] == '0':
-        print(f"\nPrediction: {prediction[0]}\n Meaning the content of the web page {url} is not related to AI")  # Assuming binary classification: 0 or 1
-    else:
-        print(f"\nPrediction: {prediction[0]}\n Meaning the content of the web page {url} is of unknown class")
+    main(sys.argv[1:])
